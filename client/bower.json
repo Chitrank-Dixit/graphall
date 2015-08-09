@@ -1,0 +1,20 @@
+{
+  "name": "graphall",
+  "version": "0.0.0",
+  "authors": [
+    "Chitrank-Dixit <chitrankdixit@gmail.com>"
+  ],
+  "description": "This is a graph making software make any kind of graphs",
+  "keywords": [
+    "grunt",
+    "angularjs",
+    "bootstrap",
+    "ruby on rails"
+  ],
+  "license": "MIT",
+  "homepage": "http://chitrank-dixit.github.io",
+  "dependencies": {
+    "angular": "~1.4.3",
+    "d3": "~3.5.6"
+  }
+}

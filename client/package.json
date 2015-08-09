@@ -1,0 +1,22 @@
+{
+  "name": "graphall",
+  "version": "0.0.0",
+  "description": "This is a graph making application make any kind of graph",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "grunt",
+    "angularjs",
+    "bootstrap",
+    "ruby",
+    "on",
+    "rails"
+  ],
+  "author": "Chitrank Dixit",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "grunt": "~0.4.5"
+  }
+}
