@@ -15,6 +15,7 @@
   "homepage": "http://chitrank-dixit.github.io",
   "dependencies": {
     "angular": "~1.4.3",
-    "d3": "~3.5.6"
+    "d3": "~3.5.6",
+    "angular-devise": "~1.1.0"
   }
 }

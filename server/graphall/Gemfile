@@ -18,6 +18,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise', '~> 3.4.0'
 
+# angular rails csrf protection
+gem 'angular_rails_csrf'
+
+# angular rails template
+gem 'angular-rails-templates'
+
+gem 'sprockets', '2.12.3'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
