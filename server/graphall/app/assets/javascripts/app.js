@@ -53,6 +53,16 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
           $state.go('home');
         })
       }]
+    })
+    .state('create_graph', {
+      url: '/create_graph',
+      templateUrl: 'graphs/_graphs.html',
+      controller: 'GraphsCtrl',
+      /*onEnter: ['$state', 'Auth', function($state, Auth) {
+        Auth.currentUser().then(function (){
+          $state.go('home');
+        })
+      }]*/
     });
 
     $urlRouterProvider.otherwise('home');
