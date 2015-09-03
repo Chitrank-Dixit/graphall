@@ -26,3 +26,18 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+Start Postgresql
+==================
+
+for Mac OS X run this command
+
+Start manually:
+
+pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+
+Stop manually:
+
+pg_ctl -D /usr/local/var/postgres stop -s -m fast
+
+
