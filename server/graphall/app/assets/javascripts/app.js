@@ -1,4 +1,4 @@
-angular.module('graphAll', ['ui.router', 'templates', 'Devise'])
+angular.module('graphAll', ['ui.router', 'templates', 'Devise','nvd3'])
 .config([
 '$stateProvider',
 '$urlRouterProvider',

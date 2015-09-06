@@ -18,18 +18,19 @@ Simple graph start making from here
         ng-model="description"></input>
       </div>
       <div class="form-group">
-        <input type="text"
-        class="form-control"
-        placeholder="Graph Type "
-        ng-model="graph_type"></input>
+        <select name="graph_type" ng-model="graph_type" ng-options="item.id as item.name for item in graph_type">
+          <option  value="">Select Graph</option>
+        </select>
       </div>
 
       <div class="form-group">
-        <input type="text"
-        class="form-control"
-        placeholder="Access Type"
-        ng-model="access_type"></input>
+        <select name="access_type" ng-model="access_type">
+          <option value="public">Public</option>
+          <option value="saab">Private</option>
+        </select>
       </div>
       <button type="submit" class="btn btn-primary">Create Graph</button>
 </form>
+        Sample Graph to test it is working
+        <nvd3 options="options" data="data"></nvd3>
 </html>
