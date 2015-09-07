@@ -1,5 +1,4 @@
 <html>
-Simple graph start making from here
 
 <form ng-submit="CreateGraph()"
       style="margin-top:30px;">
@@ -12,15 +11,9 @@ Simple graph start making from here
         ng-model="name"></input>
       </div>
       <div class="form-group">
-        <input type="text"
-        class="form-control"
+        <textarea class="form-control"
         placeholder="description"
-        ng-model="description"></input>
-      </div>
-      <div class="form-group">
-        <select name="graph_type" ng-model="graph_type" ng-options="item.id as item.name for item in graph_type">
-          <option  value="">Select Graph</option>
-        </select>
+        ng-model="description"></textarea>
       </div>
 
       <div class="form-group">
@@ -29,8 +22,47 @@ Simple graph start making from here
           <option value="saab">Private</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Create Graph</button>
+
+      <div class="form-group">
+        <select name="graph_type" ng-model="graph_type" ng-options="item.id as item.name for item in graph_types" ng-change="setGraph()">
+        </select>
+      </div>
+
+      
+
+      
+      
+      <div ng-show="graph_type === 1">
+        <div class="form-group">
+          Line Graph
+        </div>
+      </div>
+
+      <div ng-show="graph_type === 2">
+        <div class="form-group">
+          Bar Chart
+        </div>
+      </div>
+
+      <div ng-show="graph_type === 3">
+        <div class="form-group">
+          <h5>Pie Chart</h5>
+          <p>Please enter name and value of pie chart</p>
+          <input type="button" class="pull-right btn btn-primary" value="Add Name/Value" ng-click="addNameVal()"/>
+          <div ng-repeat="pieslice in inputs">
+            <div class="row">
+              <input type="text" class="form-group col-lg-3" placeholder="Name of Pie slice" ng-model="pieslice.name" \> 
+              <input type="number" class="form-group col-lg-3" placeholder="Value of Pie Slice" ng-model="pieslice.value"\> 
+              <button class="btn btn-warning" ng-click="addtoNameValQueue(pieslice)">Add</button>
+              <!-- <p>{{pieslice.name}}</p>
+              <p>{{pieslice.value}}</p> -->
+            </div>
+          </div>
+          <nvd3 options="options" data="data"></nvd3>
+        </div>
+      </div>
+        
+        <!-- <nvd3 options="options" data="data"></nvd3> -->
+      <button type="submit" class="btn btn-primary" ng-click="graph_val()">Create Graph</button>
 </form>
-        Sample Graph to test it is working
-        <nvd3 options="options" data="data"></nvd3>
 </html>
