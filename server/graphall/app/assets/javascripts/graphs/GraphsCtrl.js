@@ -27,6 +27,8 @@ function($scope){
         console.log("Graph is", $scope.graph_type);
         if($scope.graph_type === 1)
         {
+            $scope.options = {};
+            $scope.data = [];
             $scope.options = {
             chart: {
                 type: 'lineChart',
@@ -121,7 +123,9 @@ function($scope){
         }
         else if($scope.graph_type === 2)
         {
-            console.log($scope.graph_type)
+            console.log($scope.graph_type);
+            $scope.options = {};
+            $scope.data = [];
             $scope.options = {
             chart: {
                 type: 'historicalBarChart',
@@ -168,6 +172,8 @@ function($scope){
         }
         else if($scope.graph_type === 3)
         {
+            $scope.options = {};
+            $scope.data = [];
             $scope.options = {
                 chart: {
                     type: 'pieChart',
@@ -194,11 +200,13 @@ function($scope){
         }
     };
 
+
+    // for pie charts only 
     $scope.addNameVal = function() {
         $scope.inputs.push({});
     };
 
-    $scope.addtoNameValQueue= function(pieslice) {
+    $scope.addSlice= function(pieslice) {
         console.log(pieslice.name, pieslice.value);
         var pie_slice = {
             key: pieslice.name,
@@ -207,6 +215,19 @@ function($scope){
         $scope.data.push(pie_slice);
     };
 
+    $scope.removeSlice = function(pieslice) {
+        console.log(pieslice.name,pieslice, $scope.data, pieslice.key);
+        for (var item in $scope.data)
+        {
+            if(item.key === pieslice.key && item.y === pieslice.y)
+            {
+                $scope.data.pop(pieslice["$$hashKey"]);
+                $scope.inputs.pop(pieslice["$$hashKey"]);
+                //$scope.pieslice.name = '';
+                //$scope.pieslice.value = 0;
+            }
+        }
+    };
 
 
     
