@@ -35,12 +35,14 @@
       <div ng-show="graph_type === 1">
         <div class="form-group">
           Line Graph
+          <nvd3 options="options" data="data"></nvd3>
         </div>
       </div>
 
       <div ng-show="graph_type === 2">
         <div class="form-group">
           Bar Chart
+          <nvd3 options="options" data="data"></nvd3>
         </div>
       </div>
 
