@@ -21,6 +21,9 @@ function($scope){
 
     $scope.data = [];
 
+    // disable is false till the button is clicked
+    $scope.isDisabled = false;
+
     
 
     $scope.setGraph =  function() {
@@ -204,25 +207,59 @@ function($scope){
     // for pie charts only 
     $scope.addNameVal = function() {
         $scope.inputs.push({});
+        $scope.isDisabled = false;
     };
 
     $scope.addSlice= function(pieslice) {
         console.log(pieslice.name, pieslice.value);
-        var pie_slice = {
-            key: pieslice.name,
-            y: pieslice.value
-        };
-        $scope.data.push(pie_slice);
+        var occurence = 0
+        if($scope.data.length > 0)
+        {
+            for (var item in $scope.data)
+            {
+                console.log(item.key, pieslice.key, $scope.data)
+                if($scope.data[item].key === pieslice.name)
+                {
+                    $scope.flash_message = 'Slice Already added';
+                    console.log($scope.flash_message);
+                    occurence = occurence + 1;
+                    break;
+                }
+                
+            }
+            if (occurence ===0 )
+            {
+                var pie_slice = {
+                    key: pieslice.name,
+                    y: pieslice.value
+                };
+                $scope.data.push(pie_slice);   
+            }
+            
+            
+        }
+        else
+        {
+            var pie_slice = {
+                key: pieslice.name,
+                y: pieslice.value
+            };
+            $scope.data.push(pie_slice);
+        }
+        
+        
+        //$scope.isDisabled = true;
     };
 
     $scope.removeSlice = function(pieslice) {
-        console.log(pieslice.name,pieslice, $scope.data, pieslice.key);
+        //console.log(pieslice.name,pieslice, $scope.data, pieslice.name, pieslice.value);
         for (var item in $scope.data)
         {
-            if(item.key === pieslice.key && item.y === pieslice.y)
+            console.log($scope.data[item].key, $scope.data[item].y, pieslice["$$hashKey"] );
+            if($scope.data[item].key === pieslice.name)
             {
-                $scope.data.pop(pieslice["$$hashKey"]);
-                $scope.inputs.pop(pieslice["$$hashKey"]);
+                $scope.data.splice(item,1);
+                $scope.inputs.splice(item,1);
                 //$scope.pieslice.name = '';
                 //$scope.pieslice.value = 0;
             }
