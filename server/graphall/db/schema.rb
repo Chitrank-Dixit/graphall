@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822193922) do
+ActiveRecord::Schema.define(version: 20150917193953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,22 @@ ActiveRecord::Schema.define(version: 20150822193922) do
     t.string   "access_type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
+
+  add_index "graphs", ["user_id"], name: "index_graphs_on_user_id", using: :btree
+
+  create_table "pie_charts", force: :cascade do |t|
+    t.string   "name"
+    t.float    "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "graph_id"
+  end
+
+  add_index "pie_charts", ["graph_id"], name: "index_pie_charts_on_graph_id", using: :btree
+  add_index "pie_charts", ["user_id"], name: "index_pie_charts_on_user_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -70,5 +85,8 @@ ActiveRecord::Schema.define(version: 20150822193922) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "graphs", "users"
+  add_foreign_key "pie_charts", "graphs"
+  add_foreign_key "pie_charts", "users"
   add_foreign_key "posts", "users"
 end

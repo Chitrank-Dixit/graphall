@@ -1,7 +1,8 @@
 angular.module('graphAll')
 .controller('GraphsCtrl', [
 '$scope',
-function($scope){
+'graphs',
+function($scope, graphs){
 
     /* Chart options */
     //$scope.options = { /* JSON data */ };
@@ -203,6 +204,45 @@ function($scope){
         }
     };
 
+    $scope.createGraph = function() {
+        if($scope.graph_type === 1)
+        {
+
+        }
+        else if($scope.graph_type === 2)
+        {
+
+        }
+        else if($scope.graph_type === 3)
+        {
+            console.log("We are here");
+            graphs.create({
+              name: $scope.name,
+              description: $scope.description,
+              graph_type: $scope.graph_type,
+              access_type: $scope.access_type
+            }).success(function(data) {
+                console.log("Data is ", data, $scope.data);
+                for (var i=0;i<$scope.data.length;i++)
+                {
+
+                    console.log($scope.data[i].key, $scope.data[i].y);
+                    var name = $scope.data[i]["key"];
+                    var value = $scope.data[i]["y"];
+                    console.log(name, value);
+                    graphs.addPieChart(data.id, {
+                        name: name,
+                        value: value.toFixed(2),
+                        author: 'user'
+                    }).success(function(piecharts) {
+                    //$scope.post.comments.push(comment);
+                        console.log("Piecharts inserted" );
+                    });
+                }
+            });
+            
+        }
+    };
 
     // for pie charts only 
     $scope.addNameVal = function() {
@@ -266,38 +306,7 @@ function($scope){
         }
     };
 
-
     
 
-        // $scope.data = [
-        //     {
-        //         key: "One",
-        //         y: 8
-        //     },
-        //     {
-        //         key: "Two",
-        //         y: 2
-        //     },
-        //     {
-        //         key: "Three",
-        //         y: 9
-        //     },
-        //     {
-        //         key: "Four",
-        //         y: 7
-        //     },
-        //     {
-        //         key: "Five",
-        //         y: 4
-        //     },
-        //     {
-        //         key: "Six",
-        //         y: 3
-        //     },
-        //     {
-        //         key: "Seven",
-        //         y: .5
-        //     }
-        // ];
 
 }]);

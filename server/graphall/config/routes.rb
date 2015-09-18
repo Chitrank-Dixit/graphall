@@ -13,6 +13,22 @@ Rails.application.routes.draw do
       put '/upvote' => 'posts#upvote'
     end
   end
+
+  resources :graphs, only: [:create, :index, :show, :delete] do
+    resources :pie_charts, only: [:show, :create, :delete] do
+      member do
+        put '/edit' => 'pie_charts#edit'
+        delete '/delete' => 'pie_charts#delete'
+      end
+
+    end
+
+    member do
+      put '/edit' => 'graphs#edit'
+      delete '/delete' => 'graphs#delete'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

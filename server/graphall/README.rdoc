@@ -29,6 +29,14 @@ Please feel free to use a different markup language if you do not plan to run
 
 Start Postgresql
 ==================
+follow tutorial to install pg gem on mac
+https://matthew.mceachen.us/blog/howto-wrangle-the-pg-postgresql-gem-with-macports-and-rvm-1159.html
+
+install pg gem like
+sudo gem install pg -- --with-pg-config=/usr/local/Cellar/postgresql/9.4.4/bin/pg_config
+or
+sudo env ARCHFLAGS="-arch x86_64" gem install pg
+
 
 for Mac OS X run this command
 
