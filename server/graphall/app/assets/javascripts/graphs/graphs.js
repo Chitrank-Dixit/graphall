@@ -45,6 +45,12 @@ angular.module('graphAll')
 	o.addPieChart = function(id, piechart){
 		return $http.post('/graphs/' + id + '/pie_charts.json', piechart);
 	};
+
+	o.getPieChart = function(id, piechart){
+	    return $http.get('/graphs/' + id + '/pie_charts.json').then(function(res){
+	    	return res.data;
+	  	});
+	};
 	// o.addComment = function(id, comment) {
 	//   return $http.post('/graphs/' + id + '/comments.json', comment);
 	// };

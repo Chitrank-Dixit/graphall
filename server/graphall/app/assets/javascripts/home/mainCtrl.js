@@ -2,7 +2,8 @@ angular.module('graphAll')
 .controller('MainCtrl', [
 '$scope',
 'posts',
-function($scope, posts){
+'graphs',
+function($scope, posts, graphs){
   $scope.test = 'Hello world!';
   /*$scope.posts = [
 	  {title: 'post 1', upvotes: 5},
@@ -35,6 +36,9 @@ function($scope, posts){
   $scope.incrementUpvotes = function(post) {
     posts.upvote(post);
   };
+
+  $scope.graphs = graphs.graphs;
+  console.log($scope.graphs,posts, graphs);
 
   // d3 simple test code
   /*var diameter = 960,
