@@ -23,12 +23,19 @@
     </div>
 
     <div ng-repeat="graph in graphs">
-      <!-- <span class="glyphicon glyphicon-thumbs-up"
-        ng-click="incrementUpvotes(post)"></span>
-      {{post.upvotes}} -->
       <span style="font-size:20px; margin-left:10px;">
-        <h3>{{graph.name}}</h3>
+        <a href="#/graphs/{{graph.id}}"><h3>{{graph.name}}</h3></a>
         <p>{{graph.description}}</p>
+        <div ng-if="graph.pie_charts">
+          <div ng-repeat="slice in graph.pie_charts" ng-load="generateGraph(graph.pie_charts,graph.graph_type)">
+            
+            <div ng-if="graph.graph_type === 3">
+              <nvd3 options="options" data="data"></nvd3>
+            </div>
+
+          </div>
+        </div>
+        
 
       </span>
       
@@ -36,7 +43,7 @@
       
     </div>
 
-    <form ng-submit="addPost()"
+    <!-- <form ng-submit="addPost()"
       style="margin-top:30px;">
       <h3>Add a new post</h3>
 
@@ -53,5 +60,5 @@
         ng-model="link"></input>
       </div>
       <button type="submit" class="btn btn-primary">Post</button>
-    </form>
+    </form> -->
   

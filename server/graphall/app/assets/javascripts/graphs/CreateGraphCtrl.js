@@ -1,9 +1,10 @@
 angular.module('graphAll')
-.controller('GraphsCtrl', [
+.controller('CreateGraphCtrl', [
 '$scope',
 'graphs',
-function($scope, graphs){
 
+function($scope, graphs){
+    
     /* Chart options */
     //$scope.options = { /* JSON data */ };
 
@@ -306,6 +307,58 @@ function($scope, graphs){
         }
     };
 
+
+    // view Graph
+
+    // $scope.graph = graph;
+    // console.log($scope.graph);
+    // $scope.getGraph = function() {
+    //     console.log("In it", $scope.graph.graph_type);
+    //     if($scope.graph.graph_type === "1")
+    //     {
+
+    //     }
+    //     else if($scope.graph.graph_type === "2")
+    //     {
+
+    //     }
+    //     else if($scope.graph.graph_type === "3")
+    //     {
+    //       //$scope.data= $scope.graph.pie_charts;  
+    //       for (var item in $scope.graph.pie_charts) 
+    //       {
+    //         console.log(item);
+    //         var pairs = {
+    //             key: $scope.graph.pie_charts[item].name,
+    //             y: $scope.graph.pie_charts[item].value
+    //         }; 
+    //         $scope.data.push(pairs);
+    //       }
+    //       console.log($scope.data);
+    //       $scope.options = {
+    //                 chart: {
+    //                     type: 'pieChart',
+    //                     height: 500,
+    //                     x: function(d){return d.key;},
+    //                     y: function(d){return d.y;},
+    //                     showLabels: true,
+    //                     transitionDuration: 500,
+    //                     labelThreshold: 0.01,
+    //                     legend: {
+    //                         margin: {
+    //                             top: 5,
+    //                             right: 35,
+    //                             bottom: 5,
+    //                             left: 0
+    //                         }
+    //                     }
+    //                 }
+    //             };
+    //     }
+        
+    // };
+
+    
     
 
 

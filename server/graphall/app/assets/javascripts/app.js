@@ -18,7 +18,10 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'MainCtrl',
       resolve: {
         postPromise: ['posts', function(posts){
-        return posts.getAll();
+          return posts.getAll();
+        }],
+        graphPromise: ['graphs', function(graphs){
+          return graphs.getAll();
         }]
       }
     })
@@ -30,6 +33,17 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
       resolve: {
         post: ['$stateParams', 'posts', function($stateParams, posts) {
         return posts.get($stateParams.id);
+        }]
+      }
+    })
+
+    .state('graphs', {
+      url: '/graphs/{id}',
+      templateUrl: 'graphs/_graphpage.html',
+      controller: 'ViewGraphCtrl',
+      resolve: {
+        graph: ['$stateParams', 'graphs', function($stateParams, graphs) {
+        return graphs.get($stateParams.id);
         }]
       }
     })
@@ -57,7 +71,7 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('create_graph', {
       url: '/create_graph',
       templateUrl: 'graphs/_graphs.html',
-      controller: 'GraphsCtrl',
+      controller: 'CreateGraphCtrl',
       /*onEnter: ['$state', 'Auth', function($state, Auth) {
         Auth.currentUser().then(function (){
           $state.go('home');

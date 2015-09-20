@@ -20,6 +20,10 @@ class GraphsController < ApplicationController
 		respond_with graph
 	end
 
+	# def delete
+
+	# end
+
 	private
 
 	def graph_params

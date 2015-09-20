@@ -30,7 +30,7 @@ angular.module('graphAll')
         });
 	}
 
-	o.get = function(id, type) {
+	o.get = function(id) {
 	  return $http.get('/graphs/' + id + '.json').then(function(res){
 	    return res.data;
 	  });

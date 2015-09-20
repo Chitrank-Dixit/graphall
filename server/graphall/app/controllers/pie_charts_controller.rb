@@ -7,6 +7,17 @@ class PieChartsController < ApplicationController
     respond_with graph, pie_chart
   end
 
+  def show
+    graph = Graph.find(params[:graph_id])
+    #pie_chart = 
+  end
+
+  # def edit
+  # end
+
+  # def delete
+  # end
+
   # def upvote
   #   post = Post.find(params[:post_id])
   #   comment = post.comments.find(params[:id])
