@@ -23,10 +23,9 @@ angular.module('graphAll')
 	//     });
 	// };
 
-	o.edit = function(id, type) {
-		return $http.put('/graphs/' + graph.id + '/upvote.json')
-	     .success(function(data){
-	       graph.upvotes += 1;
+	o.edit = function(graph, id) {
+		return $http.put('/graphs/' + id + '/edit.json', graph, id).success(function(data){
+	       console.log(data);
         });
 	}
 
@@ -51,6 +50,14 @@ angular.module('graphAll')
 	    	return res.data;
 	  	});
 	};
+	o.editPieChart = function(id, piechart){
+		return $http.put('/graphs' + id + '/pie_charts.json', piechart);
+	};
+	o.deletePieChart = function(id, piechart) {
+		return $http.delete('/graphs' + id +'/pie_charts.json', piechart);
+	}
+
+
 	// o.addComment = function(id, comment) {
 	//   return $http.post('/graphs/' + id + '/comments.json', comment);
 	// };

@@ -1,10 +1,13 @@
 angular.module('graphAll')
-.controller('CreateGraphCtrl', [
+.controller('EditGraphCtrl', [
 '$scope',
 'graphs',
+'graph',
 '$state',
-function($scope, graphs, $state){
+function($scope, graphs, graph ,$state){
     
+    console.log(graphs);
+    console.log(graph);
     /* Chart options */
     //$scope.options = { /* JSON data */ };
 
@@ -16,13 +19,17 @@ function($scope, graphs, $state){
      	{ name: 'Bar Chart', id: 2}
     ];
 
-
-    // add Name/Value dynamically code
-
     $scope.inputs = [];
 
     $scope.data = [];
 
+
+
+
+
+    // add Name/Value dynamically code
+
+    
     // disable is false till the button is clicked
     $scope.isDisabled = false;
 
@@ -178,7 +185,7 @@ function($scope, graphs, $state){
         else if($scope.graph_type === 3)
         {
             $scope.options = {};
-            $scope.data = [];
+            //$scope.data = [];
             $scope.options = {
                 chart: {
                     type: 'pieChart',
@@ -205,7 +212,7 @@ function($scope, graphs, $state){
         }
     };
 
-    $scope.createGraph = function() {
+    $scope.editGraph = function() {
         if($scope.graph_type === 1)
         {
 
@@ -217,12 +224,12 @@ function($scope, graphs, $state){
         else if($scope.graph_type === 3)
         {
             console.log("We are here");
-            graphs.create({
+            graphs.edit({
               name: $scope.name,
               description: $scope.description,
               graph_type: $scope.graph_type,
               access_type: $scope.access_type
-            }).success(function(data) {
+            }, graph.id).success(function(data) {
                 console.log("Data is ", data, $scope.data);
                 for (var i=0;i<$scope.data.length;i++)
                 {
@@ -231,13 +238,13 @@ function($scope, graphs, $state){
                     var name = $scope.data[i]["key"];
                     var value = $scope.data[i]["y"];
                     console.log(name, value);
-                    graphs.addPieChart(data.id, {
+                    graphs.editPieChart(data.id, {
                         name: name,
                         value: value.toFixed(2),
                         author: 'user'
                     }).success(function(piecharts) {
                     //$scope.post.comments.push(comment);
-                        console.log("Piecharts inserted" );
+                        console.log("Piecharts updated" );
                     });
                 }
                 $state.go('home');
@@ -309,55 +316,39 @@ function($scope, graphs, $state){
     };
 
 
-    // view Graph
+    $scope.name = graph.name;
+    $scope.description = graph.description;
+    $scope.access_type = graph.access_type;
+    $scope.graph_type = parseInt(graph.graph_type);
 
-    // $scope.graph = graph;
-    // console.log($scope.graph);
-    // $scope.getGraph = function() {
-    //     console.log("In it", $scope.graph.graph_type);
-    //     if($scope.graph.graph_type === "1")
-    //     {
+    if($scope.graph_type == 1)
+    {
 
-    //     }
-    //     else if($scope.graph.graph_type === "2")
-    //     {
+    }
+    else if($scope.graph_type == 2)
+    {
 
-    //     }
-    //     else if($scope.graph.graph_type === "3")
-    //     {
-    //       //$scope.data= $scope.graph.pie_charts;  
-    //       for (var item in $scope.graph.pie_charts) 
-    //       {
-    //         console.log(item);
-    //         var pairs = {
-    //             key: $scope.graph.pie_charts[item].name,
-    //             y: $scope.graph.pie_charts[item].value
-    //         }; 
-    //         $scope.data.push(pairs);
-    //       }
-    //       console.log($scope.data);
-    //       $scope.options = {
-    //                 chart: {
-    //                     type: 'pieChart',
-    //                     height: 500,
-    //                     x: function(d){return d.key;},
-    //                     y: function(d){return d.y;},
-    //                     showLabels: true,
-    //                     transitionDuration: 500,
-    //                     labelThreshold: 0.01,
-    //                     legend: {
-    //                         margin: {
-    //                             top: 5,
-    //                             right: 35,
-    //                             bottom: 5,
-    //                             left: 0
-    //                         }
-    //                     }
-    //                 }
-    //             };
-    //     }
-        
-    // };
+    }
+    else if($scope.graph_type == 3)
+    {
+        var i=0;
+        while(i < graph.pie_charts.length)
+        {
+             var pie_slice = {
+                 key: graph.pie_charts[i].name,
+                 y: graph.pie_charts[i].value
+            };
+            console.log(graph.pie_charts[i]);
+            $scope.inputs.push({
+                name: graph.pie_charts[i].name,
+                value: graph.pie_charts[i].value
+            });
+            $scope.data.push(pie_slice);
+            i++;
+        }
+        $scope.setGraph();
+    }
+    
 
     
     

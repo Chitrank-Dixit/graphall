@@ -1,0 +1,19 @@
+<div class="page-header" >
+    <div class="pull-right" ng-if="graph.user.id === getUserData('id')">
+      <a class="btn btn-danger" href="#/graphs/delete/{{graph.id}}">delete</a>
+      <a class="btn btn-primary" href="#/graphs/edit/{{graph.id}}">edit</a>
+    </div>
+      <h3>
+        {{graph.name}}
+
+      </h3>
+
+</div>
+<div data-ng-init="getGraph()">
+
+  <p>{{graph.description}}</p>
+  
+  
+  <nvd3 options="options" data="data"></nvd3>
+</div>
+    

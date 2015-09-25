@@ -1,5 +1,5 @@
 class GraphsController < ApplicationController
-	before_filter :authenticate_user!, only: [:create, :edit]
+	before_filter :authenticate_user!, only: [:create, :edit, :delete]
 	  
 
 	def index
@@ -16,13 +16,16 @@ class GraphsController < ApplicationController
 
 	def edit
 		graph = Graph.find(params[:id])
+		#puts graph_params, graph
 		#graph.increment!(:upvotes)
-		respond_with graph
+		respond_with Graph.update(params)
 	end
 
-	# def delete
-
-	# end
+	def delete
+		graph = Graph.find(params[:id])
+		graph.destroy
+		
+	end
 
 	private
 

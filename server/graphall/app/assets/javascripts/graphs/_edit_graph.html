@@ -1,7 +1,8 @@
 <html>
 
 <form style="margin-top:30px;">
-      <h3>Create a New Graph</h3>
+      <h3>Edit this Graph</h3>
+      {{graph}}
 
       <div class="form-group">
         <input type="text"
@@ -65,6 +66,6 @@
       </div>
         
         <!-- <nvd3 options="options" data="data"></nvd3> -->
-      <button type="submit" class="btn btn-primary" ng-click="createGraph()">Create Graph</button>
+      <button type="submit" class="btn btn-warning" ng-click="editGraph()">Save Changes</button>
 </form>
 </html>

@@ -1,8 +1,10 @@
 angular.module('graphAll')
 .controller('NavCtrl', [
 '$scope',
+'$state',
+'$window',
 'Auth',
-function($scope, Auth){
+function($scope,$state, $window,Auth ){
 	$scope.signedIn = Auth.isAuthenticated;
   $scope.logout = Auth.logout;
 
@@ -20,6 +22,9 @@ function($scope, Auth){
 
   $scope.$on('devise:logout', function (e, user){
     $scope.user = {};
+    $window.localStorage.clear();
+    $state.go('home');
+
   });
   
 }]);

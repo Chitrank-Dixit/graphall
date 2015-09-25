@@ -12,11 +12,13 @@ class PieChartsController < ApplicationController
     #pie_chart = 
   end
 
-  # def edit
-  # end
+  def edit
+    graph = Graph.find(params[:graph_id])
+  end
 
-  # def delete
-  # end
+  def delete
+    graph = Graph.find(params[:graph_id])
+  end
 
   # def upvote
   #   post = Post.find(params[:post_id])

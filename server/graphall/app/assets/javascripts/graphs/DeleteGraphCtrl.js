@@ -1,5 +1,5 @@
 angular.module('graphAll')
-.controller('ViewGraphCtrl', [
+.controller('DeleteGraphCtrl', [
 '$scope',
 '$window',
 'graphs',
@@ -25,9 +25,9 @@ function($scope,  $window ,graphs, graph){
     /* Chart data */
     //$scope.data = { /* JSON data */ }
     $scope.graph_types = [
-    	{ name: 'Pie Chart', id: 3},
-    	{ name: 'Line Graph',id: 1}, 
-     	{ name: 'Bar Chart', id: 2}
+        { name: 'Pie Chart', id: 3},
+        { name: 'Line Graph',id: 1}, 
+        { name: 'Bar Chart', id: 2}
     ];
 
 
@@ -90,6 +90,10 @@ function($scope,  $window ,graphs, graph){
         
     };
 
+    $scope.deleteGraph = function(graph) {
+        console.log(graph);
+
+    };
     
     
 

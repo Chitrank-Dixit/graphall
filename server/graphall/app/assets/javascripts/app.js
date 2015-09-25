@@ -37,16 +37,7 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
 
-    .state('graphs', {
-      url: '/graphs/{id}',
-      templateUrl: 'graphs/_graphpage.html',
-      controller: 'ViewGraphCtrl',
-      resolve: {
-        graph: ['$stateParams', 'graphs', function($stateParams, graphs) {
-        return graphs.get($stateParams.id);
-        }]
-      }
-    })
+    
 
     .state('login', {
       url: '/login',
@@ -69,14 +60,44 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
       }]
     })
     .state('create_graph', {
-      url: '/create_graph',
-      templateUrl: 'graphs/_graphs.html',
+      url: '/graphs/create',
+      templateUrl: 'graphs/_create_graph.html',
       controller: 'CreateGraphCtrl',
       /*onEnter: ['$state', 'Auth', function($state, Auth) {
         Auth.currentUser().then(function (){
           $state.go('home');
         })
       }]*/
+    })
+    .state('view_graph', {
+      url: '/graphs/{id}',
+      templateUrl: 'graphs/_view_graph.html',
+      controller: 'ViewGraphCtrl',
+      resolve: {
+        graph: ['$stateParams', 'graphs', function($stateParams, graphs) {
+        return graphs.get($stateParams.id);
+        }]
+      }
+    })
+    .state('delete_graph', {
+      url: '/graphs/delete/{id}',
+      templateUrl: 'graphs/_delete_graph.html',
+      controller: 'DeleteGraphCtrl',
+      resolve: {
+        graph: ['$stateParams', 'graphs', function($stateParams, graphs) {
+        return graphs.get($stateParams.id);
+        }]
+      }
+    })
+    .state('edit_graph', {
+      url: '/graphs/edit/{id}',
+      templateUrl: 'graphs/_edit_graph.html',
+      controller: 'EditGraphCtrl',
+      resolve: {
+        graph: ['$stateParams', 'graphs', function($stateParams, graphs) {
+        return graphs.get($stateParams.id);
+        }]
+      }
     });
 
     $urlRouterProvider.otherwise('home');

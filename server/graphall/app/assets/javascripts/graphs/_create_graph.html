@@ -1,0 +1,70 @@
+<html>
+
+<form style="margin-top:30px;">
+      <h3>Create a New Graph</h3>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="name"
+        ng-model="name"></input>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control"
+        placeholder="description"
+        ng-model="description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <select name="access_type" ng-model="access_type">
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <select name="graph_type" ng-model="graph_type" ng-options="item.id as item.name for item in graph_types" ng-change="setGraph()">
+        </select>
+      </div>
+
+      
+
+      
+      
+      <div ng-show="graph_type === 1">
+        <div class="form-group">
+          Line Graph
+          <nvd3 options="options" data="data"></nvd3>
+        </div>
+      </div>
+
+      <div ng-show="graph_type === 2">
+        <div class="form-group">
+          Bar Chart
+          <nvd3 options="options" data="data"></nvd3>
+        </div>
+      </div>
+
+      <div ng-show="graph_type === 3">
+        <div class="form-group">
+          <h5>Pie Chart</h5>
+          <p>Please enter name and value of pie chart</p>
+          <input type="button" class="pull-right btn btn-primary" value="Add Name/Value" ng-click="addNameVal()"/>
+          <div ng-repeat="pieslice in inputs">
+            <div class="row">
+              <input type="text" class="form-group col-lg-3" placeholder="Name of Pie slice" ng-model="pieslice.name" \> 
+              <input type="number" class="form-group col-lg-3" placeholder="Value of Pie Slice" ng-model="pieslice.value"\> 
+              <button class="btn btn-warning" ng-click="addSlice(pieslice)" ng-disabled="isDisabled">Add</button>
+              <button class="btn btn-danger" ng-click="removeSlice(pieslice)">Remove</button>
+              <!-- <p>{{pieslice.name}}</p>
+              <p>{{pieslice.value}}</p> -->
+            </div>
+          </div>
+          <nvd3 options="options" data="data"></nvd3>
+        </div>
+      </div>
+        
+        <!-- <nvd3 options="options" data="data"></nvd3> -->
+      <button type="submit" class="btn btn-success" ng-click="createGraph()">Create Graph</button>
+</form>
+</html>
