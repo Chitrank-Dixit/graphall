@@ -18,7 +18,8 @@ class GraphsController < ApplicationController
 		graph = Graph.find(params[:id])
 		#puts graph_params, graph
 		#graph.increment!(:upvotes)
-		respond_with Graph.update(params)
+		puts params
+		respond_with graph.update(graph_params)
 	end
 
 	def delete

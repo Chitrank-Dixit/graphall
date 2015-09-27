@@ -13,11 +13,14 @@ class PieChartsController < ApplicationController
   end
 
   def edit
-    graph = Graph.find(params[:graph_id])
+    pie_chart = PieChart.find(params[:id])
+    pie_chart_params[:value] = pie_chart_params[:value].to_f
+    respond_with pie_chart.update(pie_chart_params)
   end
 
   def delete
     graph = Graph.find(params[:graph_id])
+    respond_with graph.destroy(params)
   end
 
   # def upvote

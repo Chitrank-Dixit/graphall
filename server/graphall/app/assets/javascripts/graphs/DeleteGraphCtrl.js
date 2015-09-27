@@ -90,9 +90,26 @@ function($scope,  $window ,graphs, graph){
         
     };
 
-    $scope.deleteGraph = function(graph) {
-        console.log(graph);
+    $scope.deleteGraph = function() {
+        if(graph.graph_type === "1")
+        {
 
+        }
+        else if(graph.graph_type === "2")
+        {
+
+        }
+        else if(graph.graph_type === "3")
+        {
+            graphs.deletePieChart(graph.id);
+            graphs.delete(graph.id, graph.graph_type).success(function(data){
+                console.log("graph deleted now");
+            });
+        }
+    };
+
+    $scope.donotdelete = function(graph) {
+        // $state.go()
     };
     
     
