@@ -235,27 +235,44 @@ function($scope, graphs, graph ,$state){
                 console.log("Data is ", "Data" + $scope.data, "PieCharts"+graph.pie_charts);
                 var temp = $scope.data;
                 console.log(temp[0].key, graph.pie_charts[0].name);
-                for (var i=0;i<graph.pie_charts.length;i++)
+                for (var i=0;i<$scope.data.length;i++)
                 {
 
                     
                         
                         //console.log(i, "spliced data", $scope.data);
-                        var name = temp[i].key;
-                        var value = parseFloat(temp[i].key);
-                        var id = graph.pie_charts[i]["id"];
-                        //console.log(name, value);
-                        temp.splice(0,1);
-                        graphs.editPieChart(parseInt(graph.id), {
+                        if ($scope.data[i]["id"])
+                        {
+
+                            var id = $scope.data[i]["id"];
+                            var name = $scope.data[i]["key"];
+                            var value = $scope.data[i]["y"];
+                            graphs.editPieChart(parseInt($scope.graph.id), {
                             id: id,
                             name: name,
                             value: value.toFixed(2)
-                        }).success(function(piecharts) {
-                            
-                            //console.log(temp);
-                            console.log("Piecharts updated");
-                            
-                        });
+                            }).success(function(piecharts) {
+                                console.log("Piecharts updated");
+                            });
+                        }
+                        else
+                        {
+                            var name = $scope.data[i]["key"];
+                            var value = $scope.data[i]["y"];
+                            console.log(name, value);
+                            graphs.addPieChart($scope.graph.id, {
+                                name: name,
+                                value: value.toFixed(2),
+                                author: 'user'
+                            }).success(function(piecharts) {
+                            //$scope.post.comments.push(comment);
+                                console.log("Piecharts inserted" );
+                            });
+                        }
+                        
+
+                        
+                        console.log($scope.data, $scope.graph.pie_charts);
                     
                     
                 }
@@ -368,17 +385,19 @@ function($scope, graphs, graph ,$state){
         while(i < graph.pie_charts.length)
         {
              var pie_slice = {
-                 key: graph.pie_charts[i].name,
-                 y: graph.pie_charts[i].value
-            };
-            console.log(graph.pie_charts[i]);
-            $scope.inputs.push({
+                id: graph.pie_charts[i].id,
+                key: graph.pie_charts[i].name,
+                y: graph.pie_charts[i].value
+             };
+             
+             $scope.inputs.push({
                 name: graph.pie_charts[i].name,
                 value: graph.pie_charts[i].value
-            });
-            $scope.data.push(pie_slice);
-            i++;
+             });
+             $scope.data.push(pie_slice);
+             i++;
         }
+        console.log("Formatted data", $scope.data);
         $scope.setGraph();
     }
     
