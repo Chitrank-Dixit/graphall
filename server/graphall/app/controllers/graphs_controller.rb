@@ -24,7 +24,7 @@ class GraphsController < ApplicationController
 
 	def delete
 		graph = Graph.find(params[:id])
-		graph.destroy
+		respond_with graph.destroy
 		
 	end
 

@@ -18,6 +18,8 @@ function($scope, graphs, graph ,$state){
      	{ name: 'Bar Chart', id: 2}
     ];
 
+    $scope.graph = graph;
+
     $scope.inputs = [];
 
     $scope.data = [];

@@ -2,10 +2,11 @@ angular.module('graphAll')
 .controller('DeleteGraphCtrl', [
 '$scope',
 '$window',
+'$state',
 'graphs',
 'graph',
 
-function($scope,  $window ,graphs, graph){
+function($scope,  $window , $state,graphs, graph){
 
     // get user data
     $scope.getUserData = function(arg) {
@@ -15,6 +16,7 @@ function($scope,  $window ,graphs, graph){
         return userdata[arg]
     }
     
+    $scope.graph = graph;
     
     console.log("user data is: ", $scope.userdata);
 
@@ -101,11 +103,25 @@ function($scope,  $window ,graphs, graph){
         }
         else if(graph.graph_type === "3")
         {
-            graphs.deletePieChart(graph.id);
-            graphs.delete(graph.id, graph.graph_type).success(function(data){
-                console.log("graph deleted now");
-            });
+            console.log("In graphs of type 3", graph);
+            var count = 0;
+            for (var i=0;i<$scope.graph.pie_charts.length; i++)
+            {
+                graphs.deletePieChart($scope.graph.id, $scope.graph.pie_charts[i]).success(function(data){
+                    console.log("Pie Chart slice deleted now");
+                    count = count + 1;
+                }); 
+            }
+
+            
+            
         }
+        if ((count === $scope.graph.pie_charts.length) || (graph.graph_type === "3"))
+        {
+            graphs.delete($scope.graph.id, $scope.graph.graph_type); // unable to create a success callback do not what is the problem need to explore this
+        }
+        
+        $state.go('home');
     };
 
     $scope.donotdelete = function(graph) {

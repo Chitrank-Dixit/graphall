@@ -305,6 +305,7 @@ function($scope, graphs, $state){
                 //$scope.pieslice.name = '';
                 //$scope.pieslice.value = 0;
             }
+            
         }
     };
 

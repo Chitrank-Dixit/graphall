@@ -29,7 +29,7 @@ angular.module('graphAll')
 	};
 
 	o.delete = function(id, type) {
-	  return $http.delete('/graphs/'+ id + '.json').then(function(res){
+	  return $http.delete('/graphs/'+ id + '/delete.json').then(function(res){
 		return res.data;
 	  });
 	};

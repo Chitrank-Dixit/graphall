@@ -19,8 +19,8 @@ class PieChartsController < ApplicationController
   end
 
   def delete
-    graph = Graph.find(params[:graph_id])
-    respond_with graph.destroy(params)
+    graph = PieChart.find(params[:id])
+    respond_with graph.destroy
   end
 
   # def upvote
