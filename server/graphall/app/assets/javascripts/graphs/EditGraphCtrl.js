@@ -19,6 +19,7 @@ function($scope, graphs, graph ,$state){
     ];
 
     $scope.graph = graph;
+    $scope.todelete = [];
 
     $scope.inputs = [];
 
@@ -276,6 +277,13 @@ function($scope, graphs, graph ,$state){
                     
                     
                 }
+
+                for (var i=0;i<$scope.todelete.length;i++)
+                {
+                    graphs.deletePieChart($scope.graph.id, $scope.todelete[i]).success(function(data){
+                        console.log("Pie Chart slice deleted now");
+                    });
+                }
                 console.log($scope.data);
                 // if (temp > 0)
                 // {
@@ -357,8 +365,11 @@ function($scope, graphs, graph ,$state){
             console.log($scope.data[item].key, $scope.data[item].y, pieslice["$$hashKey"] );
             if($scope.data[item].key === pieslice.name)
             {
+                $scope.todelete.push($scope.data[item]);
                 $scope.data.splice(item,1);
                 $scope.inputs.splice(item,1);
+
+
                 //$scope.pieslice.name = '';
                 //$scope.pieslice.value = 0;
             }
