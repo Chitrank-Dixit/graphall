@@ -24,7 +24,7 @@ function($scope, graphs, $state){
     $scope.data = [];
 
     // disable is false till the button is clicked
-    $scope.isDisabled = false;
+    $scope.isDisabled = [];
 
     
 
@@ -248,11 +248,11 @@ function($scope, graphs, $state){
 
     // for pie charts only 
     $scope.addNameVal = function() {
-        $scope.inputs.push({});
-        $scope.isDisabled = false;
+        $scope.inputs.push({index: 0});
+        $scope.isDisabled = 0;
     };
 
-    $scope.addSlice= function(pieslice) {
+    $scope.addSlice= function(pieslice, index) {
         console.log(pieslice.name, pieslice.value);
         var occurence = 0
         if($scope.data.length > 0)
@@ -272,10 +272,12 @@ function($scope, graphs, $state){
             if (occurence ===0 )
             {
                 var pie_slice = {
+                    index: index,
                     key: pieslice.name,
                     y: pieslice.value
                 };
-                $scope.data.push(pie_slice);   
+                $scope.data.push(pie_slice);
+
             }
             
             
@@ -283,14 +285,36 @@ function($scope, graphs, $state){
         else
         {
             var pie_slice = {
+                index: index,
                 key: pieslice.name,
                 y: pieslice.value
             };
             $scope.data.push(pie_slice);
+            
         }
         
+        $scope.isDisabled = index;
+        pieslice.index = index;
         
-        //$scope.isDisabled = true;
+        
+    };
+
+
+    $scope.editSlice = function(pieslice, index) {
+        for (var item in $scope.data)
+        {
+            console.log($scope.data[item].key, $scope.data[item].y, pieslice["$$hashKey"] );
+            if($scope.data[item].index === index)
+            {
+                //$scope.data.splice(item,1);
+                //$scope.inputs.splice(item,1);
+                //$scope.pieslice.name = '';
+                //$scope.pieslice.value = 0;
+                $scope.data[item].key = pieslice.name;
+                $scope.data[item].y = pieslice.value;
+            }
+            
+        }
     };
 
     $scope.removeSlice = function(pieslice) {

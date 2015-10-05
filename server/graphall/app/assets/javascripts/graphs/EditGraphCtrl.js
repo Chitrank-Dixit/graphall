@@ -313,11 +313,11 @@ function($scope, graphs, graph ,$state){
 
     // for pie charts only 
     $scope.addNameVal = function() {
-        $scope.inputs.push({});
+        $scope.inputs.push({index: 0});
         $scope.isDisabled = false;
     };
 
-    $scope.addSlice= function(pieslice) {
+    $scope.addSlice= function(pieslice, index) {
         console.log(pieslice.name, pieslice.value);
         var occurence = 0
         if($scope.data.length > 0)
@@ -337,6 +337,7 @@ function($scope, graphs, graph ,$state){
             if (occurence ===0 )
             {
                 var pie_slice = {
+                    index: index,
                     key: pieslice.name,
                     y: pieslice.value
                 };
@@ -348,14 +349,32 @@ function($scope, graphs, graph ,$state){
         else
         {
             var pie_slice = {
+                index: index,
                 key: pieslice.name,
                 y: pieslice.value
             };
             $scope.data.push(pie_slice);
         }
         
-        
+        pieslice.index = index;
         //$scope.isDisabled = true;
+    };
+
+    $scope.editSlice = function(pieslice, index) {
+        for (var item in $scope.data)
+        {
+            console.log($scope.data[item].key, $scope.data[item].y, pieslice["$$hashKey"], index );
+            if($scope.data[item].index === index)
+            {
+                //$scope.data.splice(item,1);
+                //$scope.inputs.splice(item,1);
+                //$scope.pieslice.name = '';
+                //$scope.pieslice.value = 0;
+                $scope.data[item].key = pieslice.name;
+                $scope.data[item].y = pieslice.value;
+            }
+            
+        }
     };
 
     $scope.removeSlice = function(pieslice) {
@@ -395,13 +414,16 @@ function($scope, graphs, graph ,$state){
         var i=0;
         while(i < graph.pie_charts.length)
         {
+            console.log(graph.pie_charts);
              var pie_slice = {
+                index: i+1,
                 id: graph.pie_charts[i].id,
                 key: graph.pie_charts[i].name,
                 y: graph.pie_charts[i].value
              };
              
              $scope.inputs.push({
+                index: i+1,
                 name: graph.pie_charts[i].name,
                 value: graph.pie_charts[i].value
              });

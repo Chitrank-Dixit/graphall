@@ -54,7 +54,8 @@
             <div class="row">
               <input type="text" class="form-group col-lg-3" placeholder="Name of Pie slice" ng-model="pieslice.name" \> 
               <input type="number" class="form-group col-lg-3" placeholder="Value of Pie Slice" ng-model="pieslice.value"\> 
-              <button class="btn btn-warning" ng-click="addSlice(pieslice)" ng-disabled="isDisabled">Add</button>
+              <button class="btn btn-warning" ng-click="addSlice(pieslice, $index+1)" ng-show="pieslice.index !== $index+1">Add</button>
+              <button class="btn btn-primary" ng-click="editSlice(pieslice, $index+1)" ng-show="pieslice.index === $index+1">Edit</button>
               <button class="btn btn-danger" ng-click="removeSlice(pieslice)">Remove</button>
               <!-- <p>{{pieslice.name}}</p>
               <p>{{pieslice.value}}</p> -->
