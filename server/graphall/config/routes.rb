@@ -29,6 +29,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :resources , only: [:create, :index, :show, :delete] do
+    member do
+      put '/edit' => 'resources#edit'
+      delete '/delete' => 'resources#delete'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -12,6 +12,7 @@ function($scope, posts, graphs){
 	  {title: 'post 4', upvotes: 9},
 	  {title: 'post 5', upvotes: 4}
   ];*/
+  
   $scope.posts = posts.posts;
   $scope.posts.push({
     title: $scope.title,

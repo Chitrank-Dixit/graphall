@@ -23,6 +23,9 @@ function($stateProvider, $urlRouterProvider, $locationProvider) {
         graphPromise: ['graphs', function(graphs){
           return graphs.getAll();
         }]
+        // resourcePromise: ['resources', function(resources){
+        //   return resources.getAll();
+        // }]
       }
     })
 

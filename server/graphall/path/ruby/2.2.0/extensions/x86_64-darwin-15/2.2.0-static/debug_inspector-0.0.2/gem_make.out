@@ -1,0 +1,11 @@
+/Users/chitrankdixit/.rbenv/versions/2.2.3/bin/ruby -r ./siteconf20151028-925-1kjlh7b.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling debug_inspector.c
+linking shared-object debug_inspector.bundle
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug_inspector.bundle ./.gem.20151028-925-5vvytm

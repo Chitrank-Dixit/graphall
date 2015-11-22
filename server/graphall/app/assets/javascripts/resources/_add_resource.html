@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>Add Resource</h1>
+</div>
+
+<form ng-submit="add_resource()">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Resource Name" ng-model="resource.name">
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" placeholder="Description" ng-model="resource.description"></textarea>
+  </div>
+  <input type="submit" class="btn btn-primary" value="Add">
+</form>

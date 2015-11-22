@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">
-        Graph All
+        Spiddy Analytics
       </a>
     </div>
 	<div class="collapse navbar-collapse navbar-default pull-right" ng-controller="NavCtrl">
@@ -11,6 +11,7 @@
 	    <li><a href="#/home">Home</a></li>
 	    <li ng-hide="signedIn()"><a href="#/login">Log In</a></li>
 	    <li ng-hide="signedIn()"><a href="#/register">Register</a></li>
+      <li ng-show="signedIn()"><a href="#/resources/add">Add Resource</a></li>
 	    <li ng-show="signedIn()"><a href="#/graphs/create">Create Graph</a></li>
 	    <li ng-show="signedIn()"><a href="#/">{{ user.username }}</a></li>
 	    <li ng-show="signedIn()"><a href="" ng-click="logout()">Log Out</a></li>
@@ -20,3 +21,6 @@
 
 </nav>
 
+
+  
+  

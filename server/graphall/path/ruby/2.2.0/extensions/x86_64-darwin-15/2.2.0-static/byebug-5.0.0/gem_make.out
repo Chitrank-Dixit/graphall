@@ -1,0 +1,15 @@
+/Users/chitrankdixit/.rbenv/versions/2.2.3/bin/ruby -r ./siteconf20151028-925-1dxcp8g.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling breakpoint.c
+compiling byebug.c
+compiling context.c
+compiling locker.c
+compiling threads.c
+linking shared-object byebug/byebug.bundle
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 byebug.bundle ./.gem.20151028-925-1mn47an/byebug

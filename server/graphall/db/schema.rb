@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917193953) do
+ActiveRecord::Schema.define(version: 20151110053112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,12 @@ ActiveRecord::Schema.define(version: 20150917193953) do
   add_index "pie_charts", ["graph_id"], name: "index_pie_charts_on_graph_id", using: :btree
   add_index "pie_charts", ["user_id"], name: "index_pie_charts_on_user_id", using: :btree
 
+  create_table "plans", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.string   "link"
@@ -62,6 +68,18 @@ ActiveRecord::Schema.define(version: 20150917193953) do
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "plan_id"
+    t.integer  "user_id"
+  end
+
+  add_index "resources", ["plan_id"], name: "index_resources_on_plan_id", using: :btree
+  add_index "resources", ["user_id"], name: "index_resources_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -77,11 +95,22 @@ ActiveRecord::Schema.define(version: 20150917193953) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.integer  "plan_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["plan_id"], name: "index_users_on_plan_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "webs", force: :cascade do |t|
+    t.string   "url"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "resource_id"
+  end
+
+  add_index "webs", ["resource_id"], name: "index_webs_on_resource_id", using: :btree
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
@@ -89,4 +118,8 @@ ActiveRecord::Schema.define(version: 20150917193953) do
   add_foreign_key "pie_charts", "graphs"
   add_foreign_key "pie_charts", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "resources", "plans"
+  add_foreign_key "resources", "users"
+  add_foreign_key "users", "plans"
+  add_foreign_key "webs", "resources"
 end
